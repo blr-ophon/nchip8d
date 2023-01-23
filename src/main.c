@@ -2,6 +2,8 @@
 #include <time.h>
 
 void setup(struct chip8 *chip8, const char *filename){
+    //load keymap and program to chip8 memory
+    //TODO: custom keymap
     chip8_init(chip8);
     chip8->running_state = true;
 
@@ -16,6 +18,7 @@ void setup(struct chip8 *chip8, const char *filename){
     FILE *f = fopen(filename, "rb");
     if(!f){
 	    fprintf(stderr, "Failed to open the file / Empty file\n");
+        exit(1);
     }
     fseek(f, 0, SEEK_END); 
     long size = ftell(f); 
@@ -25,6 +28,7 @@ void setup(struct chip8 *chip8, const char *filename){
     int res = fread(buf, size, 1, f);
     if(res != 1){
         fprintf(stderr, "Failed to read from file\n");
+        exit(1);
     }
 
     chip8_load(chip8, buf, size);
@@ -43,6 +47,7 @@ int main(int argc, char *argv[]){
 
     if(argc < 2){
         fprintf(stderr, "Must provide a file\n");
+        exit(1);
         return -1;
     }
     const char* filename = argv[1];

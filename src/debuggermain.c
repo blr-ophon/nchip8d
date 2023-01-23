@@ -57,6 +57,7 @@ void debugger_main(struct chip8 *chip8, struct DisplaySettings *display){
     
     unsigned short opcode = chip8_memory_read16(&chip8->memory, chip8->registers.PC);
     if(opcode & 0xD000){
+        //only renders after a draw instruction
         debugger_miniature(renderer, chip8, width);
     }
 
@@ -68,8 +69,8 @@ void debugger_main(struct chip8 *chip8, struct DisplaySettings *display){
             fontsize 
     );
     if(DebuggerFont == NULL){
-        fprintf(stderr, "Font not found\n");
-        //exit(1);
+        fprintf(stderr, "Font not found\nSDL Error:\n%s\n", SDL_GetError());
+        exit(2);
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +87,7 @@ void debugger_main(struct chip8 *chip8, struct DisplaySettings *display){
     SDL_RenderDrawRect(renderer, &registers_border);
 
     
-    show_chip8_registers(renderer, chip8, DebuggerFont, width);
+    show_chip8_registers(renderer, chip8, width, DebuggerFont);
 
 
 ////////////////////////////////////////////////////////////////////////////////

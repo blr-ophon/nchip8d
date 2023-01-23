@@ -3,6 +3,8 @@
 int last_frame_time = 0;
 
 void clock_delay(){
+    //ensures fetch-execute frequency of 500hz by
+    //delaying program execution until 2ms have passed
     int time_passed = SDL_GetTicks() - last_frame_time;
     int time_to_wait = CLOCK_PERIOD - time_passed;
 
@@ -15,6 +17,7 @@ void clock_delay(){
 
 
 void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
+    game_input(chip8, display);
     int window_multiplier = display->window_multiplier;
     SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
     SDL_RenderClear(display->renderer);
@@ -37,7 +40,6 @@ void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
 }
 
 void game_main(struct DisplaySettings *display, struct chip8 *chip8){
-    game_input(chip8, display);
     clock_delay();
     unsigned short opcode = fetch_execute(chip8);
     if(opcode & 0xD000){

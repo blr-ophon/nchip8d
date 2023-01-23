@@ -4,6 +4,8 @@
 #include "./gameinput.h"
 
 void clock_delay();
+//ensures fetch-execute frequency of 500hz by
+//delaying program execution until 2ms have passed
 
 void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8);
 

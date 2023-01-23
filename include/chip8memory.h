@@ -8,6 +8,12 @@ struct chip8_memory{
 };
 
 void chip8_memory_write(struct chip8_memory *memory,int index, unsigned char val);
+//write a byte in memory
+
 unsigned char chip8_memory_read(struct chip8_memory *memory, int index);
+//read a byte from memory
+
 unsigned short chip8_memory_read16(struct chip8_memory *memory, int index);
+//read a word from memory
+
 #endif

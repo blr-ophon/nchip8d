@@ -25,13 +25,14 @@ const char character_sprites[] = {
 
 
 void chip8_init(struct chip8 *chip8){
-    //set memory and all registers to 0;
+    //initialize memory, screen and all registers to 0
     memset(chip8, 0, sizeof(struct chip8));
     //store character set in 0x000 to 0x1FF
     memcpy(&chip8->memory.memory, character_sprites, sizeof(character_sprites));
 }
 
 void chip8_load(struct chip8 *chip8, const char *buf, size_t size){
+    //load contents of buffer to 0x200 in virtual memory
     //program start at 0x200 and must not overflow memory
    assert(size + PROGRAM_LOAD_ADDRESS  < CHIP8_MEMORY_SIZE);
    //copy contents of buffer to 0x200 in virtual memory
@@ -41,6 +42,7 @@ void chip8_load(struct chip8 *chip8, const char *buf, size_t size){
 
 static char chip8_wait_for_key_press(struct chip8* chip8)
 {
+    //used by instruction 0xfx02 to stop execution until key is pressed
     SDL_Event event;
     while(SDL_WaitEvent(&event)){
         if(event.type != SDL_KEYDOWN){
@@ -57,6 +59,7 @@ static char chip8_wait_for_key_press(struct chip8* chip8)
 }
 
 unsigned short fetch_execute(struct chip8 *chip8){
+    //fetch instruction, execute and increment program counter
     unsigned short opcode = chip8_memory_read16(&chip8->memory, chip8->registers.PC);
     chip8->registers.PC += 2;
     chip8_exec(chip8, opcode);
@@ -68,6 +71,7 @@ unsigned short fetch_execute(struct chip8 *chip8){
 
 
 void chip8_exec(struct chip8 *chip8, unsigned short opcode){
+    //executes machine code
     switch(opcode){
         case 0x00E0: //clear screen
             screen_clear(&chip8->screen);

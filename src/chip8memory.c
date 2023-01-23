@@ -2,7 +2,7 @@
 #include <assert.h>
 
 
-static void chip8_is_memory_in_bound(int index){ //static ensures the function can only be used in this file
+static void chip8_is_memory_in_bound(int index){ 
     assert(index >= 0 && index < CHIP8_MEMORY_SIZE);
 }
 

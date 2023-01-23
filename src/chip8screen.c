@@ -7,17 +7,19 @@ static void check_screen_bounds(int x, int y){
 }
 
 void screen_clear(struct chip8_screen *screen){
+    //blank screen
     memset(screen->pixels, 0, sizeof(screen->pixels));
 }
 
 void screen_set(struct chip8_screen* screen, int x, int y){
+    //draws a pixel in screen on (x,y)
     check_screen_bounds(x,y);
     screen->pixels[y][x] = true;
-
 }
 
 
 bool screen_is_set(struct chip8_screen *screen, int x, int y){
+    //verify if a pixel in screen on (x,y) is set
     check_screen_bounds(x,y);
     return screen->pixels[y][x];
 }
@@ -25,8 +27,10 @@ bool screen_is_set(struct chip8_screen *screen, int x, int y){
 bool draw_sprite(struct chip8_screen* screen, int x, int y, unsigned char *sprite, int num){
     /* receives sprite adress, the number of bytes (num) and x,y position in screen
      * main function is to draw 1 bytes of sprite in screen in (x,y)
-     * also checks if it collides with other bytes in screen
+     * returns true if the sprite collides with anything drawn on the screen
     */
+
+    check_screen_bounds(x,y);
     bool collision = false;
 
     for(int ly = 0; ly < num; ly++){

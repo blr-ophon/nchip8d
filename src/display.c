@@ -19,9 +19,11 @@ void init_window(struct DisplaySettings *display){
             SDL_WINDOW_RESIZABLE
     );
     display->renderer = SDL_CreateRenderer(display->window, -1, 0);
+
     if(!(display->window) || !(display->renderer)){
         fprintf(stderr, "Error creating window/renderer\n"
             "SDL Error: %s\n", SDL_GetError());
+            exit(2);
     }
 
     display->debugger_mode = false;
@@ -56,7 +58,7 @@ void display_window(struct DisplaySettings *display, struct chip8 *chip8){
             }
             if(chip8->registers.ST > 0){
                 chip8->registers.ST --;
-                //implement sound
+                //TODO: implement sound
             }
             chip8->opcode_counter = 0;
         }

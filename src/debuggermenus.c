@@ -1,6 +1,7 @@
 #include "../include/debuggermenus.h"
 
 void debugger_miniature(SDL_Renderer *renderer, struct chip8 *chip8, int width){
+    //renders miniature of the emulation
     int window_multiplier = width/CHIP8_WIDTH;
     SDL_Rect miniature_border = {
         0,
@@ -14,7 +15,6 @@ void debugger_miniature(SDL_Renderer *renderer, struct chip8 *chip8, int width){
         for(int x = 0; x < CHIP8_WIDTH; x++){
             if(screen_is_set(&chip8->screen, x, y)){
                 SDL_Rect pixel = { 
-                    //put 3 as a constant on config.h
                     x * window_multiplier/3,
                     y * window_multiplier/3,
                     PIXEL_SIZE * window_multiplier/3,
@@ -28,24 +28,22 @@ void debugger_miniature(SDL_Renderer *renderer, struct chip8 *chip8, int width){
 
 void RenderTextSurface(SDL_Renderer *renderer, SDL_Surface *surfaceText, int x, int y){
         //create a rectangle with surface size and copy surface to it
-        //rectangle has size and position (x,y)
+        //rectangle has position (x,y) and the size of the surface
         SDL_Rect text_block;
         text_block.x = x;
         text_block.y = y;
         text_block.w = surfaceText->w;
         text_block.h = surfaceText->h;
 
-        //create texture from surface
         SDL_Texture *textureText = SDL_CreateTextureFromSurface(renderer, surfaceText);
-
         SDL_RenderCopy(renderer, textureText, NULL, &text_block);
         SDL_DestroyTexture(textureText);
-
 }
 
 
 
-void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, TTF_Font *font, int width){
+void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font){
+    //display all chip8 register contents
 
     int window_multiplier = width/CHIP8_WIDTH;
 
@@ -53,27 +51,27 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, TTF_Font 
 
     int x = (CHIP8_WIDTH+1)*window_multiplier/3;
     int y = 0;
+    char s[30];
+    SDL_Surface *surfaceText;
 
     //REGISTERS V0 TO VF
     for(int i = 0; i < NUMBER_OF_REGISTERS ; i++){
         char s[30];
         sprintf(s, " V%x: %#x", i, chip8->registers.V[i]);
-        SDL_Surface *surfaceText = TTF_RenderText_Solid(font, s, fg);
+        surfaceText = TTF_RenderText_Solid(font, s, fg);
         RenderTextSurface(renderer, surfaceText, x, y);
         y += (surfaceText->h); 
         SDL_FreeSurface(surfaceText);
-
     }
     
-    //reposition on screen
+    //reposition on screen to next column
     y = 0;
     x += (CHIP8_WIDTH+1)*window_multiplier/12;
 
-    char s[30];
 
     //PC, SP, I, DT and ST 
     sprintf(s, "PC: %#x", chip8->registers.PC);
-    SDL_Surface *surfaceText = TTF_RenderText_Solid(font, s, fg);
+    surfaceText = TTF_RenderText_Solid(font, s, fg);
     RenderTextSurface(renderer, surfaceText, x, y);
     y += (surfaceText->h);
     
@@ -108,6 +106,7 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, TTF_Font 
 
 
 void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font){
+    //display chip8 buttons currently pressed
     SDL_Color fg = {255,255,255};
     SDL_Surface *surfaceText = TTF_RenderText_Solid(font, "INPUT:", fg);
     RenderTextSurface(renderer, surfaceText, (width/54), 3*(width/16));
@@ -118,7 +117,6 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
         width/54,
         width/48
     };
-
 
     char key[2];
     for(int i = 0; i < TOTAL_KEYS; i++){
@@ -133,10 +131,8 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
         SDL_RenderDrawRect(renderer, &keys_borders);
         
         sprintf(key, "%X", i);
-        SDL_Surface *surfaceText = TTF_RenderText_Solid(font, key, keys_fg);
-        //create texture from surface
+        surfaceText = TTF_RenderText_Solid(font, key, keys_fg);
         SDL_Texture *textureText = SDL_CreateTextureFromSurface(renderer, surfaceText);
-        
         SDL_RenderCopy(renderer, textureText, NULL, &keys_borders);
         SDL_DestroyTexture(textureText);
 
@@ -149,6 +145,7 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
 
 
 void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font, int start_address){
+    //shows page of 512 memory contents starting at start_address
     SDL_Color fg = {0,150,0};
 
     int x = 5*(width)/9;
@@ -165,18 +162,20 @@ void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TT
         for(int j = -1; j < 16; j++){
             char s[10];
             if(j == -1 && i == -1){
+                //blank corner
                 sprintf(s, "        "); 
             }
             else if(i == -1){
+                //top indexes
                 sprintf(s, " %01X ", j);
             }
             else if(j == -1){
+                //left indexes
                 sprintf(s, "%#05x  ", (start_address + 16*i) & 0xff0);
             }else{
+                //memory content
                 sprintf(s, " %02x", chip8->memory.memory[start_address + 16*i + j]);
             }
-
-            
 
             surfaceText = TTF_RenderText_Solid(font, s, fg);
             RenderTextSurface(renderer, surfaceText, x, y);
@@ -194,10 +193,10 @@ void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TT
 
             x += surfaceText->w;
         }
-        x = 5*(width)/9; //return x to original position
-        y += surfaceText->h;
+        x = 5*(width)/9; //return x to original position for next row
+        y += surfaceText->h; //increment y for next row
         if(i == -1){
-            y += surfaceText->h;
+            y += surfaceText->h; //space between top indexes and memory content
         }
     }
 
@@ -206,6 +205,8 @@ void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TT
 
 
 void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font){
+    //display 12 previous and 12 instructions ahead of current one pointed by PC 
+    //TODO: highlight if it is a branch-type instruction
     int x = (width)/3;
     int y = width/6;
 
@@ -214,7 +215,7 @@ void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int w
     for(int i = -12; i < 13; i++){
         SDL_Color fg = {255,152,152};
         if(chip8->registers.PC + i < 0x200){
-            sprintf(s, "        ");
+            sprintf(s, "        "); //do not print memory contents before 0x200
         }
 
         unsigned short address =chip8->registers.PC + 2*i;
@@ -224,7 +225,7 @@ void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int w
             fg.g = 41;
             fg.b = 41;
             sprintf(s, "  %#05x:   %04x <--", address, opcode);
-        }else{
+        }else{ //other instructions
             sprintf(s, "  %#05x:   %04x", address, opcode);
         }
 
