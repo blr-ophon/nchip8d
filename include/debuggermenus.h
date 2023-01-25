@@ -1,6 +1,6 @@
 #ifndef DEBUGGERMENUS_H
 #define DEBUGGERMENUS_H
-#include "./chip8.h"
+#include "chip8.h"
 
 void debugger_miniature(SDL_Renderer *renderer, struct chip8 *chip8, int width);
 //renders miniature of the emulation

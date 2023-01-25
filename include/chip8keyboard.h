@@ -1,9 +1,9 @@
 #ifndef CHIP8KEYBOARD_H
 #define CHIP8KEYBOARD_H
 
-#include "./config.h"
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include "config.h"
 
 struct chip8_keyboard{   
     bool keyboard[TOTAL_KEYS];

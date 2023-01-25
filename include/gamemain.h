@@ -1,7 +1,7 @@
 #ifndef GAMEMAIN_H
 #define GAMEMAIN_H
-#include "./chip8.h"
-#include "./gameinput.h"
+#include "chip8.h"
+#include "gameinput.h"
 
 void clock_delay();
 //ensures fetch-execute frequency of 500hz by

@@ -5,12 +5,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "./config.h"
-#include "./chip8memory.h"
-#include "./chip8registers.h"
-#include "./chip8stack.h"
-#include "./chip8keyboard.h"
-#include "./chip8screen.h"
+#include "config.h"
+#include "chip8memory.h"
+#include "chip8registers.h"
+#include "chip8stack.h"
+#include "chip8keyboard.h"
+#include "chip8screen.h"
 
 struct chip8{
     struct chip8_memory memory;

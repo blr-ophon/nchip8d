@@ -1,4 +1,4 @@
-#include "../include/chip8memory.h"
+#include "chip8memory.h"
 #include <assert.h>
 
 

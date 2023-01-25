@@ -1,7 +1,5 @@
-#include "../include/chip8.h"
-#include <memory.h>
+#include "chip8.h"
 #include <assert.h>
-#include <stdlib.h>
 
 const char character_sprites[] = {
     0xf0, 0x90, 0x90, 0x90, 0xf0,   //0

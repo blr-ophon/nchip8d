@@ -1,4 +1,4 @@
-#include "../include/gameinput.h"
+#include "gameinput.h"
 
 void game_input(struct chip8 *chip8, struct DisplaySettings *display){
     struct chip8_keyboard *keyboard = &chip8->keyboard;

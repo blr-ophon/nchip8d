@@ -1,5 +1,4 @@
-#include "../include/debuggermain.h"
-#include <stdio.h>
+#include "debuggermain.h"
 
 int start_address = PROGRAM_LOAD_ADDRESS;
 

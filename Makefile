@@ -1,6 +1,10 @@
 CC = gcc
 OPT = -O2
+
 CFLAGS = -std=c99 -g -Wall $(OPT)
+
+CFLAGS = -std=c99 -g -Wall -Wextra -pedantic $(OPT)
+
 
 INCLUDES= -I ./include
 LIBRARIES= -lSDL2 -lSDL2_ttf
