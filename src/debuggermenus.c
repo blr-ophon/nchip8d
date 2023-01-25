@@ -1,4 +1,4 @@
-#include "../include/debuggermenus.h"
+#include "debuggermenus.h"
 
 void debugger_miniature(SDL_Renderer *renderer, struct chip8 *chip8, int width){
     //renders miniature of the emulation

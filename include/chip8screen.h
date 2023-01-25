@@ -2,7 +2,8 @@
 #define CHIP8SCREEN_H
 
 #include <stdbool.h>
-#include "./config.h"
+#include <memory.h>
+#include "config.h"
 
 struct chip8_screen{
     bool pixels[CHIP8_HEIGHT][CHIP8_WIDTH];

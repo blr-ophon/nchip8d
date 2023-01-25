@@ -1,10 +1,10 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#include "./chip8.h"
-#include "./gameinput.h" 
-#include "./debuggermain.h" 
-#include "./gamemain.h"
+#include "chip8.h"
+#include "gameinput.h" 
+#include "debuggermain.h" 
+#include "gamemain.h"
 
 void init_window(struct DisplaySettings *displayPtr);
 

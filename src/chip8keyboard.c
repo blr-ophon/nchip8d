@@ -1,5 +1,5 @@
-#include "../include/chip8keyboard.h"
 #include <assert.h>
+#include "chip8keyboard.h"
 
 static void keyboard_in_bounds(int key){
     assert(key >= 0 && key < TOTAL_KEYS);

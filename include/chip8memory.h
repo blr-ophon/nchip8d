@@ -1,7 +1,7 @@
 #ifndef CHIP8MEMORY_H
 #define CHIP8MEMORY_H
+#include "config.h"
 
-#include "./config.h"
 struct chip8_memory{
     unsigned char memory[CHIP8_MEMORY_SIZE];
 

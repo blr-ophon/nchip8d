@@ -1,6 +1,5 @@
-#include "../include/chip8screen.h"
 #include <assert.h>
-#include <memory.h>
+#include "chip8screen.h"
 
 static void check_screen_bounds(int x, int y){
     assert(x >=0 && x < CHIP8_WIDTH && y >= 0 && y < CHIP8_HEIGHT);

@@ -1,6 +1,6 @@
 #ifndef CHIP8STACK_H
 #define CHIP8STACK_H
-#include "./config.h"
+#include "config.h"
 
 struct chip8; //need to redeclare to declare functions
               //struct chip8 is in chip8.h which is included in main

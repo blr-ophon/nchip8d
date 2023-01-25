@@ -1,4 +1,4 @@
-#include "../include/gamemain.h"
+#include "gamemain.h"
 
 int last_frame_time = 0;
 
@@ -17,6 +17,7 @@ void clock_delay(){
 
 
 void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
+    //clears current frame and displays another by reading video memory
     game_input(chip8, display);
     int window_multiplier = display->window_multiplier;
     SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
@@ -42,8 +43,5 @@ void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
 void game_main(struct DisplaySettings *display, struct chip8 *chip8){
     clock_delay();
     unsigned short opcode = fetch_execute(chip8);
-    if(opcode & 0xD000){
-        render_new_frame(display, chip8);
-    }
-
+    render_new_frame(display, chip8);
 }

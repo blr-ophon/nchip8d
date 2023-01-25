@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "../include/display.h"
+#include "display.h"
 
 void init_window(struct DisplaySettings *display){
     SDL_DisplayMode DM;

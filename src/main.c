@@ -1,5 +1,4 @@
-#include "../include/main.h"
-#include <time.h>
+#include "main.h"
 
 void setup(struct chip8 *chip8, const char *filename){
     //load keymap and program to chip8 memory
