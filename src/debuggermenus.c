@@ -218,8 +218,8 @@ void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int w
             sprintf(s, "        "); //do not print memory contents before 0x200
         }
 
-        unsigned short address =chip8->registers.PC + 2*i;
-        unsigned short opcode = chip8_memory_read16(&chip8->memory, address);
+        uint16_t address =chip8->registers.PC + 2*i;
+        uint16_t opcode = chip8_memory_read16(&chip8->memory, address);
         if(i == 0){ //current opcode and center of list
             fg.r = 255;
             fg.g = 41;

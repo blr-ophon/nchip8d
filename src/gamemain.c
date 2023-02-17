@@ -42,6 +42,6 @@ void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
 
 void game_main(struct DisplaySettings *display, struct chip8 *chip8){
     clock_delay();
-    unsigned short opcode = fetch_execute(chip8);
+    uint16_t opcode = fetch_execute(chip8);
     render_new_frame(display, chip8);
 }

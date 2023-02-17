@@ -1,8 +1,10 @@
+//Functions dealing with modifying and reading from the screen buffer
 #ifndef CHIP8SCREEN_H
 #define CHIP8SCREEN_H
 
 #include <stdbool.h>
 #include <memory.h>
+#include <stdint.h>
 #include "config.h"
 
 struct chip8_screen{
@@ -18,7 +20,7 @@ void screen_set(struct chip8_screen *screen, int x, int y);
 bool screen_is_set(struct chip8_screen *screen, int x, int y);
 //verify if a pixel in screen on (x,y) is set
 
-bool draw_sprite(struct chip8_screen* screen, int x, int y, unsigned char *sprite, int num);
+bool draw_sprite(struct chip8_screen* screen, int x, int y, uint8_t *sprite, int num);
 /* receives sprite adress, the number of bytes (num) and x,y position in screen
  * main function is to draw 1 bytes of sprite in screen in (x,y)
  * returns true if the sprite collides with anything drawn on the screen
