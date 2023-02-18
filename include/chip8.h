@@ -44,7 +44,7 @@ void chip8_init(struct chip8 *chip8);
 void chip8_load(struct chip8 *chip8, const char *buf, size_t size);
 //load contents of buffer to 0x200 in virtual memory
 
-unsigned short fetch_execute(struct chip8 *chip8);
+void fetch_execute(struct chip8 *chip8);
 //fetch instruction, execute and increment program counter
 
 void chip8_exec(struct chip8 *chip8, unsigned short opcode);

@@ -2,7 +2,7 @@
 
 int last_frame_time = 0;
 
-void clock_delay(){
+void clock_delay(void){
     //ensures fetch-execute frequency of 500hz by
     //delaying program execution until 2ms have passed
     int time_passed = SDL_GetTicks() - last_frame_time;
@@ -42,6 +42,6 @@ void render_new_frame(struct DisplaySettings *display, struct chip8 *chip8){
 
 void game_main(struct DisplaySettings *display, struct chip8 *chip8){
     clock_delay();
-    uint16_t opcode = fetch_execute(chip8);
+    fetch_execute(chip8);
     render_new_frame(display, chip8);
 }

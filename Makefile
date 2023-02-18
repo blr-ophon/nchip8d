@@ -1,5 +1,5 @@
 CC = gcc
-OPT = -O2
+OPT = -O0
 
 CFLAGS = -std=c99 -g -Wall $(OPT)
 
@@ -15,7 +15,7 @@ BUILD_DIR := ./build
 CFILES := $(wildcard ./src/*.c)
 OBJECTS := $(CFILES:$(CFILES_DIR)/%.c=$(BUILD_DIR)/%.o)
 EXEC := ./bin/chip8D
-ARGS := ./games/BRIX
+ARGS := ./tests/chip8-test-suite.ch8
 
 
 ${EXEC}: ${OBJECTS}

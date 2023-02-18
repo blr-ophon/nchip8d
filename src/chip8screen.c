@@ -38,7 +38,7 @@ bool draw_sprite(struct chip8_screen* screen, int x, int y, uint8_t *sprite, int
         for(int lx = 0; lx < 8; lx++){
             //check if there is any bit set in c
             if((c & (0x80 >> lx)) == 0){
-                continue; //if bit not set
+                continue; //if bit of sprite byte not set
             }
 
             if(screen->pixels[(y + ly) % CHIP8_HEIGHT][(x + lx) % CHIP8_WIDTH]){

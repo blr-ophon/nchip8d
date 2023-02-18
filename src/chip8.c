@@ -56,14 +56,12 @@ static char chip8_wait_for_key_press(struct chip8* chip8)
     return -1;
 }
 
-uint16_t fetch_execute(struct chip8 *chip8){
+void fetch_execute(struct chip8 *chip8){
     //fetch instruction, execute and increment program counter
     uint16_t opcode = chip8_memory_read16(&chip8->memory, chip8->registers.PC);
     chip8->registers.PC += 2;
     chip8_exec(chip8, opcode);
     chip8->opcode_counter++;
-
-    return opcode;
 }
 
 
@@ -188,37 +186,30 @@ void chip8_exec(struct chip8 *chip8, uint16_t opcode){
             chip8->registers.V[x] ^= chip8->registers.V[y];
             break;
             }
-        case 0x8004: //0x8xy4 sum = Vx+Vy, VF = carry of sum; Vx = lowest byte of sum
+        case 0x8004: //0x8xy4 Vx = Vx+Vy, VF = carry of sum; 
             { 
             uint16_t sum = chip8->registers.V[x] + chip8->registers.V[y];
-            chip8->registers.V[0xf] = 0;
-            if(sum > 255){
-                chip8->registers.V[0xf] = 1;
-            }
+            chip8->registers.V[0xf] = sum & 0x0100? 1 : 0;
             chip8->registers.V[x] = sum;
             break;
             }
         case 0x8005: //0x8xy5 Vx= Vx-Vy, VF = !borrow of dif
             { 
-            uint16_t dif = chip8->registers.V[x] - chip8->registers.V[y];
-            chip8->registers.V[0xf] = 0;
-            if(dif > 0){
-                chip8->registers.V[0xf] = 1;
-            }
-            chip8->registers.V[x] = dif;
+            chip8->registers.V[0xf] = chip8->registers.V[x] > chip8->registers.V[y]? 1 : 0;
+            chip8->registers.V[x] -= chip8->registers.V[y];
             break;
             }
 
         case 0x8006: //0x8xy6 VF = Vx >> 1
             chip8->registers.V[0x0F] = 0x01 & chip8->registers.V[x];  
-            chip8->registers.V[x] /= 2;
+            chip8->registers.V[x] >>= 1;
             break;
 
         case 0x8007: //0x8xy7 Vx = Vy-Vx, VF = !borrow of dif
             { 
             uint16_t dif = chip8->registers.V[y] - chip8->registers.V[x];
             chip8->registers.V[0xf] = 0;
-            if(dif > 0){
+            if(dif >= 0){
                 chip8->registers.V[0xf] = 1;
             }
             chip8->registers.V[x] = dif;
@@ -226,8 +217,8 @@ void chip8_exec(struct chip8 *chip8, uint16_t opcode){
             }
             
         case 0x800e: //0x8xye VF = Vx << 1
-            chip8->registers.V[0xF] = (0x80 & chip8->registers.V[x]) >> 7;  
-            chip8->registers.V[x] *= 2; 
+            chip8->registers.V[0xF] = (chip8->registers.V[x] & 0x80) >> 7;  
+            chip8->registers.V[x] <<= 1; 
             break;
 
         case 0x9000: //0x9xy0 skip next if Vx != Vy
