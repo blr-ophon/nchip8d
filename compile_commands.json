@@ -1,0 +1,222 @@
+[
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/chip8.o",
+      "src/chip8.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/chip8.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/chip8.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/chip8keyboard.o",
+      "src/chip8keyboard.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/chip8keyboard.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/chip8keyboard.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/chip8memory.o",
+      "src/chip8memory.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/chip8memory.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/chip8memory.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/chip8screen.o",
+      "src/chip8screen.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/chip8screen.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/chip8screen.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/chip8stack.o",
+      "src/chip8stack.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/chip8stack.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/chip8stack.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/debuggermain.o",
+      "src/debuggermain.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/debuggermain.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/debuggermain.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/debuggermenus.o",
+      "src/debuggermenus.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/debuggermenus.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/debuggermenus.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/display.o",
+      "src/display.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/display.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/display.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/gameinput.o",
+      "src/gameinput.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/gameinput.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/gameinput.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/gamemain.o",
+      "src/gamemain.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/gamemain.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/gamemain.o"
+  },
+  {
+    "arguments": [
+      "/sbin/gcc",
+      "-std=c99",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "./include",
+      "-c",
+      "-o",
+      "build/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/myshkin/Downloads/git/nchip8d",
+    "file": "/home/myshkin/Downloads/git/nchip8d/src/main.c",
+    "output": "/home/myshkin/Downloads/git/nchip8d/build/main.o"
+  }
+]

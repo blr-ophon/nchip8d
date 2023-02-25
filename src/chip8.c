@@ -40,6 +40,7 @@ void chip8_load(struct chip8 *chip8, const char *buf, size_t size){
 
 static char chip8_wait_for_key_press(struct chip8* chip8)
 {
+    //TODO: Substitute this for gameinput
     //used by instruction 0xfx02 to stop execution until key is pressed
     SDL_Event event;
     while(SDL_WaitEvent(&event)){
@@ -195,32 +196,34 @@ void chip8_exec(struct chip8 *chip8, uint16_t opcode){
             }
         case 0x8005: //0x8xy5 Vx= Vx-Vy, VF = !borrow of dif
             { 
-            chip8->registers.V[0xf] = chip8->registers.V[x] > chip8->registers.V[y]? 1 : 0;
-            chip8->registers.V[x] -= chip8->registers.V[y];
+            int8_t dif = chip8->registers.V[x] - chip8->registers.V[y];
+            chip8->registers.V[x] = dif;
+            chip8->registers.V[0xf] = dif > 0? 1 : 0;
             break;
             }
 
         case 0x8006: //0x8xy6 VF = Vx >> 1
-            chip8->registers.V[0x0F] = 0x01 & chip8->registers.V[x];  
+            {
+            uint8_t bit0 = 0x01 & chip8->registers.V[x];  
             chip8->registers.V[x] >>= 1;
+            chip8->registers.V[0xf] = bit0;
             break;
-
+            }
         case 0x8007: //0x8xy7 Vx = Vy-Vx, VF = !borrow of dif
             { 
-            uint16_t dif = chip8->registers.V[y] - chip8->registers.V[x];
-            chip8->registers.V[0xf] = 0;
-            if(dif >= 0){
-                chip8->registers.V[0xf] = 1;
-            }
+            int8_t dif = chip8->registers.V[y] - chip8->registers.V[x];
             chip8->registers.V[x] = dif;
+            chip8->registers.V[0xf] = dif > 0? 1 : 0;
             break;
             }
             
         case 0x800e: //0x8xye VF = Vx << 1
-            chip8->registers.V[0xF] = (chip8->registers.V[x] & 0x80) >> 7;  
+            {
+            uint8_t bit7 = (chip8->registers.V[x] & 0x80) >> 7;  
             chip8->registers.V[x] <<= 1; 
+            chip8->registers.V[0xf] = bit7;
             break;
-
+            }
         case 0x9000: //0x9xy0 skip next if Vx != Vy
             if(chip8->registers.V[x] != chip8->registers.V[y]){  
                 chip8->registers.PC += 2; 
