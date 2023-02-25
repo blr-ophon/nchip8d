@@ -15,7 +15,8 @@ BUILD_DIR := ./build
 CFILES := $(wildcard ./src/*.c)
 OBJECTS := $(CFILES:$(CFILES_DIR)/%.c=$(BUILD_DIR)/%.o)
 EXEC := ./bin/chip8D
-ARGS := ./tests/chip8-test-suite.ch8
+TESTGAME := ./games/INVADERS
+TESTROM := ./tests/chip8-test-suite.ch8
 
 
 ${EXEC}: ${OBJECTS}
@@ -31,7 +32,10 @@ clean:
 	rm -rf ${EXEC}
 
 run: ${EXEC}
-	$^ ${ARGS}
+	$^ ${TESTGAME}
+
+testrom: ${EXEC}
+	$^ ${TESTROM}
 
 install:
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -42,5 +46,5 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/chip8D\
 
 debug: ${EXEC}
-	cgdb --args $^ ${ARGS}
+	cgdb --args $^ ${TESTGAME}
 

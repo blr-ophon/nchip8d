@@ -4,8 +4,9 @@
 void init_window(struct DisplaySettings *display){
     SDL_DisplayMode DM;
     SDL_GetCurrentDisplayMode(0, &DM);
-    display->width = DM.w/4;
+    display->width = DM.w;
     int height = display->width * CHIP8_WINDOW_RATIO;
+    height = DM.h;
     display->window_multiplier = (display->width)/CHIP8_WIDTH;
     assert(display->width > CHIP8_WIDTH);
 

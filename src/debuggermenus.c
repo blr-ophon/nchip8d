@@ -47,7 +47,7 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width
 
     int window_multiplier = width/CHIP8_WIDTH;
 
-    SDL_Color fg = {255,255,255};
+    SDL_Color fg = {255,255,255,255};
 
     int x = (CHIP8_WIDTH+1)*window_multiplier/3;
     int y = 0;
@@ -98,7 +98,6 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width
     sprintf(s, "ST: %#x", chip8->registers.ST);
     surfaceText = TTF_RenderText_Solid(font, s, fg);
     RenderTextSurface(renderer, surfaceText, x, y);
-    y += (surfaceText->h);
 
     SDL_FreeSurface(surfaceText);
 }
@@ -107,7 +106,7 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width
 
 void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font){
     //display chip8 buttons currently pressed
-    SDL_Color fg = {255,255,255};
+    SDL_Color fg = {255,255,255,255};
     SDL_Surface *surfaceText = TTF_RenderText_Solid(font, "INPUT:", fg);
     RenderTextSurface(renderer, surfaceText, (width/54), 3*(width/16));
 
@@ -120,7 +119,7 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
 
     char key[2];
     for(int i = 0; i < TOTAL_KEYS; i++){
-        SDL_Color keys_fg = {255,255,255};
+        SDL_Color keys_fg = {255,255,255,255};
         if(chip8_keyboard_is_down(&chip8->keyboard, i)){
             SDL_RenderFillRect(renderer, &keys_borders);
             keys_fg.r = 150;
@@ -146,7 +145,7 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
 
 void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TTF_Font *font, int start_address){
     //shows page of 512 memory contents starting at start_address
-    SDL_Color fg = {0,150,0};
+    SDL_Color fg = {0,150,0,255};
 
     int x = 5*(width)/9;
     int y = width/18;
@@ -213,7 +212,7 @@ void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int w
     SDL_Surface *surfaceText;
     char s[25];
     for(int i = -12; i < 13; i++){
-        SDL_Color fg = {255,152,152};
+        SDL_Color fg = {255,152,152,255};
         if(chip8->registers.PC + i < 0x200){
             sprintf(s, "        "); //do not print memory contents before 0x200
         }
