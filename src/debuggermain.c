@@ -33,8 +33,6 @@ void debugger_input(struct chip8 *chip8, struct DisplaySettings *display){
             }
             break;
     }
-
-    SDL_PumpEvents();
 }
 
 

@@ -37,6 +37,7 @@ void RenderTextSurface(SDL_Renderer *renderer, SDL_Surface *surfaceText, int x, 
 
         SDL_Texture *textureText = SDL_CreateTextureFromSurface(renderer, surfaceText);
         SDL_RenderCopy(renderer, textureText, NULL, &text_block);
+        SDL_FreeSurface(surfaceText);
         SDL_DestroyTexture(textureText);
 }
 
@@ -61,7 +62,6 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width
         surfaceText = TTF_RenderText_Solid(font, s, fg);
         RenderTextSurface(renderer, surfaceText, x, y);
         y += (surfaceText->h); 
-        SDL_FreeSurface(surfaceText);
     }
     
     //reposition on screen to next column
@@ -99,7 +99,6 @@ void show_chip8_registers(SDL_Renderer *renderer, struct chip8 *chip8, int width
     surfaceText = TTF_RenderText_Solid(font, s, fg);
     RenderTextSurface(renderer, surfaceText, x, y);
 
-    SDL_FreeSurface(surfaceText);
 }
 
 
@@ -133,12 +132,12 @@ void debugger_display_keyboard(SDL_Renderer *renderer, struct chip8 *chip8, int 
         surfaceText = TTF_RenderText_Solid(font, key, keys_fg);
         SDL_Texture *textureText = SDL_CreateTextureFromSurface(renderer, surfaceText);
         SDL_RenderCopy(renderer, textureText, NULL, &keys_borders);
+        SDL_FreeSurface(surfaceText);
         SDL_DestroyTexture(textureText);
 
         keys_borders.x += width/54;
     }
     
-    SDL_FreeSurface(surfaceText);
 }
 
 
@@ -153,7 +152,6 @@ void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TT
     //title
     SDL_Surface *hexd_title = TTF_RenderText_Solid(font, "HEX DUMP:", fg);
     RenderTextSurface(renderer, hexd_title, x, y - 3*hexd_title->h);
-    SDL_FreeSurface(hexd_title);
 
     SDL_Surface *surfaceText;
     for(int i = -1; i < 32; i++){ 
@@ -199,7 +197,6 @@ void debugger_hexdump(SDL_Renderer *renderer, struct chip8 *chip8, int width, TT
         }
     }
 
-    SDL_FreeSurface(surfaceText);
 }
 
 
@@ -238,7 +235,6 @@ void debugger_current_opcodes(SDL_Renderer *renderer, struct chip8 *chip8, int w
         RenderTextSurface(renderer, surfaceText, x, y);
         y += (surfaceText->h);
     }
-    SDL_FreeSurface(surfaceText);
 
 }
 
