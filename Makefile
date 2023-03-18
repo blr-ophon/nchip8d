@@ -14,7 +14,7 @@ BUILD_DIR := ./build
 
 CFILES := $(wildcard ./src/*.c)
 OBJECTS := $(CFILES:$(CFILES_DIR)/%.c=$(BUILD_DIR)/%.o)
-EXEC := ./bin/chip8D
+EXEC := ./bin/nchip8D
 TESTGAME := ./games/INVADERS
 TESTROM := ./tests/chip8-test-suite.ch8
 
@@ -39,11 +39,11 @@ testrom: ${EXEC}
 
 install:
 	mkdir -p ${DESTDIR}${PREFIX}/bin
-	cp -f ./bin/chip8D ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/chip8D
+	cp -f ${EXEC} ${DESTDIR}${PREFIX}/bin
+	chmod 755 ${DESTDIR}${PREFIX}/bin/nchip8D
 
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/chip8D\
+	rm -f ${DESTDIR}${PREFIX}/bin/nchip8D\
 
 debug: ${EXEC}
 	cgdb --args $^ ${TESTGAME}
