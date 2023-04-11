@@ -9,7 +9,7 @@ Includes a simple debugger, which shows register values, memory contents, input 
 
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/OLemaB6.png)
+<img src='./misc/demo.gif'>
 
 ![App Screenshot](https://i.imgur.com/GloGgMS.png)
 
