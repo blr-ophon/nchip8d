@@ -25,7 +25,7 @@ Includes a simple debugger, which shows register values, memory contents, input 
 ## Building
 Clone the project
 ```bash
-  git clone https://github.com/blr-ophon/chip8D
+  git clone https://github.com/blr-ophon/nchip8D
 ```
 Compile and install using:
 
